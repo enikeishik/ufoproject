@@ -1,0 +1,35 @@
+{
+    "name": "enikeishik/ufoproject",
+    "type": "project",
+    "description": "UFO Framework based project.",
+    "homepage": "https://github.com/enikeishik/ufoproject",
+    "license": "GPL-3",
+    "authors": [
+        {
+            "name": "Enikeishik",
+            "email": "enikeishik@gmail.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "enikeishik/ufoframework": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://enikeishik@bitbucket.org/enikeishik/ufoframework.git",
+            "vendor-alias": "ufoframework"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
