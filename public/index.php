@@ -1,17 +1,17 @@
 <?php
-require_once dirname(dirname(__DIR__)) . '/vendor/autoload.php';
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
 use \Ufo\Core\Config;
 use \Ufo\Core\Debug;
 use \Ufo\Core\App;
 
-$_SERVER['DOCUMENT_ROOT'] = __DIR__ . '/../..';
+$_SERVER['DOCUMENT_ROOT'] = __DIR__ . '/..';
 //var_dump($_SERVER['DOCUMENT_ROOT']);
 $config = new Config();
 $debug = new Debug();
 $app = new App($config, $debug);
-$config->routeStorageData = require 'RouteStorageData.php';
-$config->widgetsStorageData = require 'WidgetsStorageData.php';
+$config->routeStorageData = require '../data/RouteStorageData.php';
+$config->widgetsStorageData = require '../data/WidgetsStorageData.php';
 
 //$_GET['path'] = '/qwe/asd';
 $debug->trace('execute');

@@ -13,15 +13,7 @@
     ],
     "require": {
         "php": "^7.2",
-        "enikeishik/ufoframework": "dev-master"
     },
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://enikeishik@bitbucket.org/enikeishik/ufoframework.git",
-            "vendor-alias": "ufoframework"
-        }
-    ],
     "autoload": {
         "psr-4": {
             "App\\": "app/"
