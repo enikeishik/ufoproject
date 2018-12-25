@@ -6,17 +6,18 @@ use \Ufo\Core\Debug;
 use \Ufo\Core\App;
 
 if (empty($_SERVER['DOCUMENT_ROOT'])) {
-    $_SERVER['DOCUMENT_ROOT'] = __DIR__ . '/..';
+    $_SERVER['DOCUMENT_ROOT'] = __DIR__; //tests
 }
 
 $config = new Config();
+$config->loadFromIni($config->projectPath . '/.config', true);
+$config->routeStorageData = require $config->projectPath . '/data/RouteStorageData.php';
+$config->widgetsStorageData = require $config->projectPath . '/data/WidgetsStorageData.php';
 $debug = new Debug();
 $app = new App($config, $debug);
-$config->routeStorageData = require '../data/RouteStorageData.php';
-$config->widgetsStorageData = require '../data/WidgetsStorageData.php';
-
 
 $debug->trace('execute');
+$_GET['path'] = '/blog';
 $app->execute();
 $debug->traceEnd();
 

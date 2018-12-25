@@ -8,49 +8,22 @@ return [
             'dbless' => true, 
         ], 
     ], 
-    '/asd' => [
-        'title' => 'ASD page', 
+    '/stub' => [
+        'title' => 'My stub', 
         'module' => [
             'id' => 1, 
-            'name' => 'Documents', 
+            'name' => 'Stub', 
+            'callback' => '\App\MyStubController', 
             'dbless' => true, 
         ], 
-        'disabled' => true, 
     ], 
-    '/asd/qwe' => [
-        'title' => 'ASD QWE page', 
+    '/blog' => [
+        'title' => 'My blog', 
         'module' => [
-            'id' => 2, 
-            'name' => 'Documents', 
+            'id' => 1, 
+            'name' => 'Blog', 
+            'callback' => '\App\MyBlogController', 
             'dbless' => true, 
-            'disabled' => true, 
-        ], 
-    ], 
-    '/qwe' => [
-        'title' => 'QWE page', 
-        'module' => [
-            'id' => 3, 
-            'name' => 'Documents', 
-        ], 
-    ], 
-    '/qwe/asd' => [
-        'title' => 'QWE ASD page', 
-        'module' => [
-            'id' => 333, 
-            'name' => 'Simple callback', 
-            'callback' => function($container) {
-                return 'content of callback for section ' . $container->section->path;
-            }, 
-            'dbless' => true, 
-            'disabled' => false, 
-        ], 
-        'disabled' => false, 
-    ], 
-    '/qwe/asd/zxc' => [
-        'title' => 'QWE ASD ZXC page', 
-        'module' => [
-            'id' => 4, 
-            'name' => 'Documents', 
         ], 
     ], 
 ];
