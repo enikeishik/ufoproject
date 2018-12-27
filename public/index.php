@@ -8,6 +8,9 @@ use \Ufo\Core\App;
 if (empty($_SERVER['DOCUMENT_ROOT'])) {
     $_SERVER['DOCUMENT_ROOT'] = __DIR__; //tests
 }
+if (!empty($argv[1])) {
+    $_GET['path'] = $argv[1];
+}
 
 $config = new Config();
 $config->loadFromIni($config->projectPath . '/.config', true);
@@ -17,7 +20,6 @@ $debug = new Debug();
 $app = new App($config, $debug);
 
 $debug->trace('execute');
-$_GET['path'] = '/blog';
 $app->execute();
 $debug->traceEnd();
 
