@@ -2,6 +2,7 @@
     "name": "enikeishik/ufoproject",
     "type": "project",
     "description": "UFO Framework based project.",
+    "keywords": ["ufo","framework","ufoframework","web"],
     "homepage": "https://github.com/enikeishik/ufoproject",
     "license": "GPL-2.0-or-later",
     "authors": [
