@@ -1,5 +1,11 @@
-widgets begin
+<?php
+/**
+ * @var array $widgets
+ */
+?>
+
+<div class="widgets">
 <?php foreach($widgets as $widget): ?>
 <?=$this->renderWidget($widget)?>
 <?php endforeach; ?>
-widgets end
+</div>

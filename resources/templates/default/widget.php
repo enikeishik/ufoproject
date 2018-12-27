@@ -1,4 +1,12 @@
-widget begin
-<?=$title?>
+<?php
+/**
+ * @var string $module
+ * @var string $name
+ * @var string $title
+ * @var string $text
+ */
+?>
 
-widget end
+<div class="widget">
+<?=$title?>
+</div>
