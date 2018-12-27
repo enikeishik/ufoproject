@@ -11,8 +11,8 @@ if (empty($_SERVER['DOCUMENT_ROOT'])) {
 
 $config = new Config();
 $config->loadFromIni($config->projectPath . '/.config', true);
-$config->routeStorageData = require $config->projectPath . '/data/RouteStorageData.php';
-$config->widgetsStorageData = require $config->projectPath . '/data/WidgetsStorageData.php';
+$config->routeStorageData = require $config->projectPath . '/data/routes.php';
+$config->widgetsStorageData = require $config->projectPath . '/data/widgets.php';
 $debug = new Debug();
 $app = new App($config, $debug);
 
@@ -26,4 +26,4 @@ echo
     'execution time: ' . round(100 * $debug->getExecutionTime(), 2) . ' ms; ' . 
     'mem: ' . number_format(memory_get_peak_usage()) . 
     PHP_EOL;
-//var_dump($debug->getTrace());
+var_dump($debug->getTrace());
