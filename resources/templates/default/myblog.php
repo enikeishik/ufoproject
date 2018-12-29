@@ -8,10 +8,10 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title><?=$title?></title>
+<title><?=$section->title?></title>
 </head>
 <body>
-<h1><?=$title?></h1>
+<h1><?=$section->title?></h1>
 <?php if(count($items) > 0): ?>
     <ul>
 <?php foreach($items as $item): ?>
