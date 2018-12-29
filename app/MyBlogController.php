@@ -10,32 +10,28 @@
 namespace App;
 
 use Ufo\Core\DIObject;
-use Ufo\Core\Result;
-use Ufo\Core\Section;
-use Ufo\Modules\ControllerInterface;
+use Ufo\Modules\Controller;
+use Ufo\Modules\ModelInterface;
 use Ufo\Modules\View;
+use Ufo\Modules\ViewInterface;
 
-class MyBlogController extends DIObject implements ControllerInterface
+class MyBlogController extends Controller
 {
     /**
-     * Main controller method.
-     * @param Section $section = null
-     * @return Result
+     * @see parent
      */
-    public function compose(Section $section = null): Result
+    protected function getModel(): ModelInterface
     {
-        $config = $this->container->get('config');
-        
-        $model = new MyBlogModel();
-        
-        $data = [
-            'title'     => $section->title, 
-            'items'     => $model->getItems(), 
-        ];
-        
-        $view = new View('myblog', $data);
+        return new MyBlogModel();
+    }
+    
+    /**
+     * @see parent
+     */
+    protected function getView(): ViewInterface
+    {
+        $view = new View('myblog', $this->data);
         $view->inject($this->container);
-        
-        return new Result($view);
+        return $view;
     }
 }

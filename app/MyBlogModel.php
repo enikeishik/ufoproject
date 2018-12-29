@@ -9,10 +9,12 @@
 
 namespace App;
 
+use Ufo\Modules\ModelInterface;
+
 /**
  * Module level model base class.
  */
-class MyBlogModel
+class MyBlogModel implements ModelInterface
 {
     /**
      * Some model method.

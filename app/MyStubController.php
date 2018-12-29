@@ -11,10 +11,10 @@ namespace App;
 
 use Ufo\Core\Result;
 use Ufo\Core\Section;
-use Ufo\Modules\ControllerInterface;
-use Ufo\Modules\Renderable;
+use Ufo\Modules\Controller;
+use Ufo\Modules\View;
 
-class MyStubController implements ControllerInterface
+class MyStubController extends Controller
 {
     /**
      * Main controller method.
@@ -23,6 +23,14 @@ class MyStubController implements ControllerInterface
      */
     public function compose(Section $section = null): Result
     {
-        return new Result(new Renderable('My stub output'));
+        $view = new View(
+            'mystub', 
+            [
+                'section' => $section, 
+                'content' => 'My stub output', 
+            ]
+        );
+        $view->inject($this->container);
+        return new Result($view);
     }
 }
