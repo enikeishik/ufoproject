@@ -1,7 +1,6 @@
 <?php
 /**
  * @var \Ufo\Modules\View $this
- * @var array $items
  */
 
 ?><!DOCTYPE html>

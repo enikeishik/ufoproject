@@ -26,4 +26,15 @@ return [
             'dbless' => true, 
         ], 
     ], 
+    '/callback' => [
+        'title' => 'My callback', 
+        'module' => [
+            'id' => 1, 
+            'name' => 'Blog', 
+            'callback' => function($container) {
+                return ['content' => 'Callback content'];
+            }, 
+            'dbless' => true, 
+        ], 
+    ], 
 ];
