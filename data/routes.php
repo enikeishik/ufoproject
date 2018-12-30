@@ -46,4 +46,15 @@ return [
             'dbless' => true, 
         ], 
     ], 
+    '/forbidden' => [
+        'title' => 'My forbidden', 
+        'module' => [
+            'id' => 1, 
+            'name' => 'Forbidden', 
+            'callback' => function($container) {
+                return $container->get('app')->getError(403, 'Forbidden');
+            }, 
+            'dbless' => true, 
+        ], 
+    ], 
 ];
