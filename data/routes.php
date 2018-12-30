@@ -37,4 +37,13 @@ return [
             'dbless' => true, 
         ], 
     ], 
+    '/redirect' => [
+        'title' => 'My redirect', 
+        'module' => [
+            'id' => 1, 
+            'name' => 'Redirect', 
+            'callback' => '\App\MyRedirectController', 
+            'dbless' => true, 
+        ], 
+    ], 
 ];
