@@ -3,7 +3,7 @@ return [
     '/' => [
         'title' => 'Main page', 
         'module' => [
-            'id' => -1, 
+            'vendor' => 'Ufo', 
             'name' => 'Mainpage', 
             'dbless' => true, 
         ], 
@@ -11,7 +11,7 @@ return [
     '/stub' => [
         'title' => 'My stub', 
         'module' => [
-            'id' => 1, 
+            'vendor' => 'Ufo', 
             'name' => 'Stub', 
             'callback' => '\App\MyStubController', 
             'dbless' => true, 
@@ -20,7 +20,7 @@ return [
     '/blog' => [
         'title' => 'My blog', 
         'module' => [
-            'id' => 1, 
+            'vendor' => 'Ufo', 
             'name' => 'Blog', 
             'callback' => '\App\MyBlogController', 
             'dbless' => true, 
@@ -29,7 +29,7 @@ return [
     '/callback' => [
         'title' => 'My callback', 
         'module' => [
-            'id' => 1, 
+            'vendor' => 'Ufo', 
             'name' => 'Blog', 
             'callback' => function($container) {
                 return ['content' => 'Callback content'];
@@ -40,7 +40,7 @@ return [
     '/redirect' => [
         'title' => 'My redirect', 
         'module' => [
-            'id' => 1, 
+            'vendor' => 'Ufo', 
             'name' => 'Redirect', 
             'callback' => '\App\MyRedirectController', 
             'dbless' => true, 
@@ -49,7 +49,7 @@ return [
     '/forbidden' => [
         'title' => 'My forbidden', 
         'module' => [
-            'id' => 1, 
+            'vendor' => 'Ufo', 
             'name' => 'Forbidden', 
             'callback' => function($container) {
                 return $container->get('app')->getError(403, 'Forbidden');
