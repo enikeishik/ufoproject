@@ -14,7 +14,8 @@
     ],
     "require": {
         "php": "^7.2",
-        "enikeishik/ufoframework": "dev-master"
+        "enikeishik/ufoframework": "dev-master",
+        "enikeishik/ufmstub": "dev-master"
     },
     "require-dev": {
         "codeception/codeception": "^2.5.1",
@@ -29,5 +30,17 @@
         "psr-4": {
             "Tests\\": "tests/"
         }
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/enikeishik/ufmstub.git",
+            "vendor-alias": "ufmstub"
+        }
+    ],
+    "scripts": {
+        "post-update-cmd": [
+            "@php -f loadassets.php enikeishik/ufmstub"
+        ]
     }
 }
