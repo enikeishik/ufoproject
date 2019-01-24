@@ -53,7 +53,7 @@ function xcopy($src, $dst) {
 
 $package = $argv[1];
 
-$src = __DIR__ . '/vendor/' . $package . '/resources';
+$src = __DIR__ . '/vendor/' . $package . '/resources/templates';
 $trg = __DIR__ . '/resources/templates/default/' . $package;
 
 if (file_exists($src) && !file_exists($trg)) {
