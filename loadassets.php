@@ -11,7 +11,7 @@
 // This little utility copy module templates into project resources dir.
 
 if (empty($argv[1])) {
-    exit('Usage: php -f loadassets.php vendor/module');
+    exit('Usage: php -f loadassets.php vendor/module [--overwrite]');
 }
 
 define('MKDIR_MODE', 0755);
@@ -19,16 +19,15 @@ define('MKDIR_MODE', 0755);
 /**
  * @param string $src
  * @param string $dst
- * @throws \Exception
  */
 function xcopy($src, $dst) {
     $files = @scandir($src);
     if (!$files) {
-        exit('Call scandir for `' . $src . '` failed');
+        exit('Call scandir(' . $src . ') failed');
     }
     if (!file_exists($dst)) {
         if (!@mkdir($dst, MKDIR_MODE, true)) {
-            exit('Call mkdir for `' . $dst . '` failed');
+            exit('Call mkdir(' . $dst . ') failed');
         }
     }
     
@@ -40,7 +39,7 @@ function xcopy($src, $dst) {
         $dstItm = $dst . '/' . $file;
         if (is_dir($srcItm)) {
             if (!@mkdir($dstItm, MKDIR_MODE, true)) {
-                exit('Call mkdir for `' . $dstItm . '` failed');
+                exit('Call mkdir(' . $dstItm . ') failed');
             }
             xcopy($srcItm, $dstItm);
         } else {
@@ -52,10 +51,11 @@ function xcopy($src, $dst) {
 }
 
 $package = $argv[1];
+$overwrite = !empty($argv[2]) && '--overwrite' == $argv[2];
 
 $src = __DIR__ . '/vendor/' . $package . '/resources/templates';
 $trg = __DIR__ . '/resources/templates/default/' . $package;
 
-if (file_exists($src) && !file_exists($trg)) {
+if (file_exists($src) && (!file_exists($trg) || $overwrite)) {
     xcopy($src, $trg);
 }
