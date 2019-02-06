@@ -36,6 +36,26 @@ return [
                 'title' => 'currency widget', 
                 'text' => 'USD GBR RUB EUR', 
             ], 
+            [
+                'vendor' => 'Enikeishik', 
+                'module' => 'Ufmexample', 
+                'name' => '', 
+                'title' => 'UFO Framework Example module widget', 
+                'text' => '', 
+                'dbless' => false, 
+                'params' => [
+                    'count' => 3, 
+                    'filter' => 'marked', 
+                ], 
+            ], 
+            [
+                'vendor' => 'Enikeishik', 
+                'module' => 'Ufmexample', 
+                'name' => 'Rtext', 
+                'title' => 'UFO Framework Example module random text widget', 
+                'text' => '', 
+                'params' => [], 
+            ], 
         ], 
     ], 
 ];

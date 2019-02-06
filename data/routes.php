@@ -57,4 +57,19 @@ return [
             'dbless' => true, 
         ], 
     ], 
+    '/modstub' => [
+        'title' => 'My stub module', 
+        'module' => [
+            'vendor' => 'Enikeishik', 
+            'name' => 'Ufmstub', 
+            'dbless' => true, 
+        ], 
+    ], 
+    '/modexample' => [
+        'title' => 'My example module', 
+        'module' => [
+            'vendor' => 'Enikeishik', 
+            'name' => 'Ufmexample', 
+        ], 
+    ], 
 ];

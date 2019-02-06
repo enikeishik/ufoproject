@@ -1,0 +1,12 @@
+html, body { margin: 0px; padding: 0px; height: 100%; background-color: #ccc; font-family: Tahoma; font-size: 13px; }
+#wrapper { width: 100%; min-width: 880px; max-width: 1440px; background-color: #fff; box-shadow: 10px 0 10px #999; }
+#header { height: 100px; width: 100%; background-color: #eee; }
+#container { width: 100%; }
+#middle { width: 100%; float: left; z-index: 1; position: relative; }
+#content { margin: 0px 250px; min-width: 380px; }
+#contentinner { margin: 10px; }
+#left { float: left; width: 250px; margin-left: -100%; background-color: #efe; z-index: 2; position: relative; }
+#leftinner { margin: 5px; }
+#right { float: left; width: 250px; margin-left: -250px; background-color: #eef; z-index: 3; position: relative; }
+#rightinner { margin: 5px; }
+#footer { clear: both; height: 100px; width: 100%; background-color: #eee; }

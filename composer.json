@@ -2,7 +2,7 @@
     "name": "enikeishik/ufoproject",
     "type": "project",
     "description": "UFO Framework based project.",
-    "keywords": ["ufo","framework","ufoframework","web"],
+    "keywords": ["ufo","framework","ufoframework","phpframework","web"],
     "homepage": "https://github.com/enikeishik/ufoproject",
     "license": "GPL-2.0-or-later",
     "authors": [
@@ -15,7 +15,8 @@
     "require": {
         "php": "^7.2",
         "enikeishik/ufoframework": "dev-master",
-        "enikeishik/ufmstub": "dev-master"
+        "enikeishik/ufmstub": "dev-master",
+        "enikeishik/ufmexample": "dev-master"
     },
     "require-dev": {
         "codeception/codeception": "^2.5.1",
@@ -36,11 +37,23 @@
             "type": "git",
             "url": "https://github.com/enikeishik/ufmstub.git",
             "vendor-alias": "ufmstub"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/enikeishik/ufmexample.git",
+            "vendor-alias": "ufmexample"
         }
     ],
     "scripts": {
         "post-update-cmd": [
-            "@php -f loadassets.php enikeishik/ufmstub"
+            "@php -f loadassets.php enikeishik/ufmstub",
+            "@php -f loadassets.php enikeishik/ufmexample"
         ]
-    }
+    },
+    "config": {
+        "preferred-install": "dist",
+        "optimize-autoloader": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
