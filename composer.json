@@ -46,8 +46,8 @@
     ],
     "scripts": {
         "post-update-cmd": [
-            "@php -f loadassets.php enikeishik/ufmstub",
-            "@php -f loadassets.php enikeishik/ufmexample"
+            "@php -f loadmodule.php enikeishik/ufmstub",
+            "@php -f loadmodule.php enikeishik/ufmexample"
         ]
     },
     "config": {
