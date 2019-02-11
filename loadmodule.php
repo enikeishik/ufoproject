@@ -72,13 +72,22 @@ function getModulesStorageCode(array $modules): string
 
 /**
  * @param array $package
+ * @return string
+ */
+function getModuleServiseProviderName(array $package): string
+{
+    return 'Ufo\Modules\\' . 
+        ucfirst($package[0]) . '\\' . ucfirst($package[1]) . 
+        '\\ServiceProvider';
+}
+
+/**
+ * @param array $package
  * @return bool
  */
 function loadModuleData(array $package): bool
 {
-    $mspCls = 'Ufo\Modules\\' . 
-        ucfirst($package[0]) . '\\' . ucfirst($package[1]) . 
-        '\\ServiceProvider';
+    $mspCls = getModuleServiseProviderName($package);
 
     $modules = @include STORAGE;
     if (!is_array($modules)) {
@@ -113,6 +122,44 @@ function loadModuleTemplates(array $package, bool $overwrite): bool
     return true;
 }
 
+function loadModuleDump(array $package): bool
+{
+    $mspCls = getModuleServiseProviderName($package);
+    if (!class_exists($mspCls)) {
+        return true;
+    }
+    
+    $msp = new $mspCls();
+    
+    $sqlDump = $msp->getSqlDump();
+    if (null === $sqlDump) {
+        return true;
+    }
+    
+    try {
+        $config = new Config();
+        $config->loadFromIni(__DIR__ . '/.config', true);
+        $db = Db::getInstance($config);
+    } catch (DbConnectException $e) {
+        return false;
+    } catch (\Throwable $e) {
+        return false;
+    }
+    
+    $sqls = explode(';', $sqlDump);
+    $result = true;
+    foreach ($sqls as $sql) {
+        if (!$db->query($sql)) {
+            $result = false;
+            break;
+        }
+    }
+    
+    $db->close();
+    
+    return $result;
+}
+
 
 
 if (empty($argv[1])) {
@@ -131,4 +178,7 @@ if (!loadModuleData($package)) {
 }
 if (!loadModuleTemplates($package, $overwrite)) {
     exit('Load module templates failed' . PHP_EOL);
+}
+if (!loadModuleDump($package)) {
+    exit('Load module dump failed' . PHP_EOL);
 }
