@@ -122,28 +122,35 @@ function loadModuleTemplates(array $package, bool $overwrite): bool
     return true;
 }
 
-function loadModuleDump(array $package): bool
+/**
+ * @param array $package
+ * @return int 0 - OK, 1 - connection parameters not set, 2 - connection error, 3 - query error
+ * @todo: make exceptions and pass error string or/and bad query into it
+ */
+function loadModuleDump(array $package): int
 {
     $mspCls = getModuleServiseProviderName($package);
     if (!class_exists($mspCls)) {
-        return true;
+        return 0;
     }
     
     $msp = new $mspCls();
     
     $sqlDump = $msp->getSqlDump();
     if (null === $sqlDump) {
-        return true;
+        return 0;
+    }
+    
+    $config = new \Ufo\Core\Config();
+    $config->loadFromIni(__DIR__ . '/.config', true);
+    if (empty($config->dbServer) || empty ($config->dbUser)) {
+        return 1;
     }
     
     try {
-        $config = new \Ufo\Core\Config();
-        $config->loadFromIni(__DIR__ . '/.config', true);
         $db = \Ufo\Core\Db::getInstance($config);
     } catch (\Ufo\Core\DbConnectException $e) {
-        return false;
-    } catch (\Throwable $e) {
-        return false;
+        return 2;
     }
     
     $sqls = explode(';', $sqlDump);
@@ -157,7 +164,7 @@ function loadModuleDump(array $package): bool
     
     $db->close();
     
-    return $result;
+    return $result ? 0 : 3;
 }
 
 
@@ -179,6 +186,16 @@ if (!loadModuleData($package)) {
 if (!loadModuleTemplates($package, $overwrite)) {
     exit('Load module templates failed' . PHP_EOL);
 }
-if (!loadModuleDump($package)) {
-    exit('Load module dump failed' . PHP_EOL);
+if (0 !== $result = loadModuleDump($package)) {
+    switch ($result) {
+        case 1:
+            exit('Load module dump failed, connection parameters not set in .config' . PHP_EOL);
+            break;
+        case 2:
+            exit('Load module dump failed, connection error, check connection parameters in .config and try again' . PHP_EOL);
+            break;
+        case 2:
+            exit('Load module dump failed, query execution error' . PHP_EOL);
+            break;
+    }
 }
