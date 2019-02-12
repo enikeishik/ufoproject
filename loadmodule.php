@@ -137,10 +137,10 @@ function loadModuleDump(array $package): bool
     }
     
     try {
-        $config = new Config();
+        $config = new \Ufo\Core\Config();
         $config->loadFromIni(__DIR__ . '/.config', true);
-        $db = Db::getInstance($config);
-    } catch (DbConnectException $e) {
+        $db = \Ufo\Core\Db::getInstance($config);
+    } catch (\Ufo\Core\DbConnectException $e) {
         return false;
     } catch (\Throwable $e) {
         return false;
@@ -149,7 +149,7 @@ function loadModuleDump(array $package): bool
     $sqls = explode(';', $sqlDump);
     $result = true;
     foreach ($sqls as $sql) {
-        if (!$db->query($sql)) {
+        if ('' != trim($sql) && !$db->query($sql)) {
             $result = false;
             break;
         }
