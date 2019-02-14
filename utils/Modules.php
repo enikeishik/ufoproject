@@ -10,6 +10,7 @@
 namespace Utils;
 
 use Ufo\Core\Config;
+use Ufo\Core\ConfigEmptyException;
 use Ufo\Core\Db;
 use Ufo\Core\DbConnectException;
 use Ufo\Core\DbQueryException;
