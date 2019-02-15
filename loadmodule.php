@@ -13,8 +13,6 @@
 declare(strict_types=1);
 
 define('USAGE', 'Usage: php -f loadmodule.php vendor/module [--overwrite]');
-define('STORAGE', __DIR__ . '/data/modules.php');
-define('MKDIR_MODE', 0755);
 
 require_once __DIR__ . '/vendor/autoload.php';
 
