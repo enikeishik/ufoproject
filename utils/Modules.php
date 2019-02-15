@@ -10,7 +10,7 @@
 namespace Utils;
 
 use Ufo\Core\Config;
-use Ufo\Core\ConfigEmptyException;
+use Ufo\Core\ConfigParameterEmptyException;
 use Ufo\Core\Db;
 use Ufo\Core\DbConnectException;
 use Ufo\Core\DbQueryException;
@@ -25,7 +25,7 @@ class Modules
     /**
      * @var string
      */
-    protected $storage = '';
+    protected $rootPath = '';
     
     /**
      * Constructor.
@@ -33,7 +33,7 @@ class Modules
      */
     public function __construct(string $rootPath)
     {
-        $this->storage = $rootPath . static::STORAGE;
+        $this->rootPath = $rootPath;
     }
     
     /**
@@ -41,19 +41,19 @@ class Modules
      * @return void
      * @throws \Utils\FilesystemException
      */
-    public function loadModuleData(array $package)
+    public function loadModuleData(array $package): void
     {
         $mspCls = $this->getModuleServiseProviderName($package);
 
-        $modules = @include $this->storage;
+        $modules = @include $this->rootPath . static::STORAGE;
         if (!is_array($modules)) {
             $modules = [];
         }
 
         if (!in_array($mspCls, $modules) && class_exists($mspCls)) {
             $modules[] = $mspCls;
-            if (false === @file_put_contents($this->storage, $this->getModulesStorageCode($modules))) {
-                throw new FilesystemException('Call file_put_contents(' . $this->storage . ', ...) failed');
+            if (false === @file_put_contents($this->rootPath . static::STORAGE, $this->getModulesStorageCode($modules))) {
+                throw new FilesystemException('Call file_put_contents(' . $this->rootPath . static::STORAGE . ', ...) failed');
             }
         }
     }
@@ -65,8 +65,8 @@ class Modules
      */
     public function loadModuleTemplates(array $package, bool $overwrite): void
     {
-        $src = __DIR__ . '/vendor/' . $package[0] . '/' . $package[1] . '/resources/templates';
-        $trg = __DIR__ . '/resources/templates/default/' . $package[0] . '/' . $package[1];
+        $src = $this->rootPath . '/vendor/' . $package[0] . '/' . $package[1] . '/resources/templates';
+        $trg = $this->rootPath . '/resources/templates/default/' . $package[0] . '/' . $package[1];
 
         if (file_exists($src) && (!file_exists($trg) || $overwrite)) {
             Filesystem::xcopy($src, $trg);
@@ -76,7 +76,7 @@ class Modules
     /**
      * @param array $package
      * @return void
-     * @throws \Ufo\Core\ConfigEmptyException
+     * @throws \Ufo\Core\ConfigParameterEmptyException
      * @throws \Ufo\Core\DbConnectException
      * @throws \Ufo\Core\DbQueryException
      */
@@ -95,9 +95,9 @@ class Modules
         }
         
         $config = new Config();
-        $config->loadFromIni(__DIR__ . '/.config', true);
+        $config->loadFromIni($this->rootPath . '/.config', true);
         if (empty($config->dbServer) || empty ($config->dbUser)) {
-            throw new ConfigEmptyException();
+            throw new ConfigParameterEmptyException('Requiered config parameter(s) [`dbServer`, `dbUser`] is missing or empty');
         }
         
         $db = Db::getInstance($config);
