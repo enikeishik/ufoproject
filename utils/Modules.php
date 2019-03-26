@@ -100,7 +100,7 @@ class Modules
             throw new ConfigParameterEmptyException('Requiered config parameter(s) [`dbServer`, `dbUser`] is missing or empty');
         }
         
-        $db = Db::getInstance($config);
+        $db = new Db($config);
         
         $sqls = explode(';', $sqlDump);
         $result = true;
