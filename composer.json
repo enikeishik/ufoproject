@@ -19,8 +19,7 @@
         "enikeishik/ufmexample": "dev-master"
     },
     "require-dev": {
-        "codeception/codeception": "^2.5.1",
-        "symfony/var-dumper": "~4.0"
+        "codeception/codeception": "^2.5.1"
     },
     "autoload": {
         "psr-4": {
